@@ -35,4 +35,11 @@ Affiliates is a DApp stemming from an idea Natty had about membership tokens. Th
 
 The new concept is that members of an organisation will subscribe to different types/levels of membership with the organisation, giving them access to different things. This concept is interesting because it gives a new take on blockchain proof-of-memberships. Most on-chain data is held indefinitely. A membership token lasts forever, but a subscription can run out. Because of this, the service we're creating is ideal for organisations like university societies, where members are not expected to stay forever, but can optionally remain involved if they wish to. However, in theory, the concept could be extended to any member-based organisation, like magazine/article subscriptions or other similar services.
 
-The actual application we're going to be making will be an implementation of this concept for the KCL Blockchain Society. In the [design](/docs/design.md) and [implementation](/docs/implementation.md) sections of the documentation, most parts mentioned can be generalised to apply to any standard client, but for this hackathon we'll implement for KCL Blockchain. Think of the application not as a standalone project or service, but as a page on the KCL Blockchain website, since this is how it would be intergrated.
+The actual application we're going to be making will be an implementation of this concept for the KCL Blockchain Society. Most of the specification mentioned the [docs](/docs/) can be generalised to apply to any standard client, but for this hackathon we'll implement for KCL Blockchain. Think of the application not as a standalone project or service, but as a page on the KCL Blockchain website, since this is how it would be intergrated.
+
+In the future, this app could be abstracted its own site, offering the same service for multiple organisations similar to how Discourse offers chat forums or Slack offers communication services. This means that organisations can easily integrate the Affiliates service into their site without needing to worry about maintainance or implementation.
+
+Please read the following for more info:
+1. [Design](/docs/design.md)
+2. [Functionality](/docs/functionality.md)
+3. [Implementation](/docs/implementation.md)
