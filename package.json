@@ -4,11 +4,11 @@
   "private": true,
   "description": "A decentralised, EVM-based subscription membership service representing special memberships in groups or organisations.",
   "scripts": {
-    "dev": "next dev",
+    "dev-f": "next dev",
+    "dev-b": "node scripts/mnbm-local.js",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "backend": "node scripts/backend.js"
+    "lint": "next lint"
   },
   "repository": {
     "type": "git",
@@ -30,9 +30,12 @@
     "@types/node": "18.6.1",
     "@types/react": "18.0.15",
     "@types/react-dom": "18.0.6",
+    "autoprefixer": "^10.4.7",
     "dotenv": "^16.0.1",
     "eslint": "8.20.0",
     "eslint-config-next": "12.2.3",
+    "postcss": "^8.4.14",
+    "tailwindcss": "^3.1.6",
     "typescript": "4.7.4",
     "winston": "^3.8.1"
   }
