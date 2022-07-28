@@ -1,7 +1,0 @@
-{
-  "editor.formatOnSave": true,
-  "[markdown]": {
-    "editor.formatOnSave": false
-  },
-  "editor.tabSize": 2
-}
