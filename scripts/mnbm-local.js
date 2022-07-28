@@ -1,16 +1,16 @@
-require("dotenv").config();
-const util = require("util");
-const exec = util.promisify(require("child_process").exec);
-const winston = require("winston");
+require('dotenv').config();
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
+const winston = require('winston');
 
 const logger = winston.createLogger({
   transports: [
     new winston.transports.Console({
       format: winston.format.combine(
         winston.format.colorize(),
-        winston.format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
+        winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
         winston.format.printf(
-          (info) =>
+          info =>
             `|${info.timestamp}| [MNBM DEV ${info.level}]: ${info.message}`
         )
       ),
@@ -19,7 +19,7 @@ const logger = winston.createLogger({
 });
 
 async function execute(command, print = true, options = {}) {
-  if (print) logger.info("-- " + command);
+  if (print) logger.info('-- ' + command);
   const { stdout, stderr } = await exec(command, options);
   if (stderr) throw stderr;
   return stdout;
@@ -33,21 +33,21 @@ async function main() {
   };
 
   if (!(process.platform in dockerrc)) {
-    logger.error("ERROR: Unsupported OS");
+    logger.error('ERROR: Unsupported OS');
     return;
   }
 
-  logger.info("Deploying local node in development node...");
-  logger.info("LAUNCHING...");
+  logger.info('Deploying local node in development node...');
+  logger.info('LAUNCHING...');
   await execute(
     `docker pull purestake/moonbeam:v${process.env.MOONBEAM_VERSION}`
   );
   execute(dockerrc[process.platform]);
 
-  logger.info("Detecting container...");
+  logger.info('Detecting container...');
   const containerID = await new Promise(async (resolve, reject) => {
     async function getCID(timeWaited = 0) {
-      if (timeWaited > 20000) reject("Took too long to get container ID");
+      if (timeWaited > 20000) reject('Took too long to get container ID');
 
       const cid = await execute(
         `docker ps -aqf "name=^${process.env.MOONBEAM_CONTAINER_NAME}$"`,
@@ -63,11 +63,11 @@ async function main() {
   logger.info(
     `[[ACTIVE]] - Local development node running in [${process.env.MOONBEAM_CONTAINER_NAME}-${containerID}]`
   );
-  process.on("SIGINT", async () => {
-    logger.info("Closing local development node...");
+  process.on('SIGINT', async () => {
+    logger.info('Closing local development node...');
     await execute(
       `${
-        process.platform == "linux" ? "sudo " : ""
+        process.platform == 'linux' ? 'sudo ' : ''
       } docker stop ${containerID}`,
       false
     );
