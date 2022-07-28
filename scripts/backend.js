@@ -3,12 +3,24 @@ const util = require("util");
 const exec = util.promisify(require("child_process").exec);
 const winston = require("winston");
 
-// TODO: use winston logging
-// TODO: suppress ouput of exec when node is closed
+const logger = winston.createLogger({
+  transports: [
+    new winston.transports.Console({
+      format: winston.format.combine(
+        winston.format.colorize(),
+        winston.format.timestamp({ format: "YYYY-MM-DD HH:mm:ss" }),
+        winston.format.printf(
+          (info) =>
+            `|${info.timestamp}| [MNBM DEV ${info.level}]: ${info.message}`
+        )
+      ),
+    }),
+  ],
+});
 
-async function execute(command, print = true) {
-  if (print) console.log("-- " + arguments);
-  const { stdout, stderr } = await exec(command);
+async function execute(command, print = true, options = {}) {
+  if (print) logger.info("-- " + command);
+  const { stdout, stderr } = await exec(command, options);
   if (stderr) throw stderr;
   return stdout;
 }
@@ -21,18 +33,18 @@ async function main() {
   };
 
   if (!(process.platform in dockerrc)) {
-    console.error("ERROR: Unsupported OS");
+    logger.error("ERROR: Unsupported OS");
     return;
   }
 
-  console.log("Deploying local Moonbeam node in development node...");
-  console.log("[[LAUNCHING]]");
+  logger.info("Deploying local node in development node...");
+  logger.info("LAUNCHING...");
   await execute(
     `docker pull purestake/moonbeam:v${process.env.MOONBEAM_VERSION}`
   );
   execute(dockerrc[process.platform]);
 
-  console.log("Detecting container...");
+  logger.info("Detecting container...");
   const containerID = await new Promise(async (resolve, reject) => {
     async function getCID(timeWaited = 0) {
       if (timeWaited > 20000) reject("Took too long to get container ID");
@@ -48,16 +60,17 @@ async function main() {
     await getCID();
   });
 
-  console.log(
+  logger.info(
     `[[ACTIVE]] - Local development node running in [${process.env.MOONBEAM_CONTAINER_NAME}-${containerID}]`
   );
   process.on("SIGINT", async () => {
-    console.log("Closing local development node...");
-    const commands = [
-      `docker stop ${containerID}`,
-      `docker rm ${containerID}`,
-    ].map((cmd) => (process.platform == "linux" ? "sudo " : "" + cmd));
-    for (const command of commands) await execute(command, false);
+    logger.info("Closing local development node...");
+    await execute(
+      `${
+        process.platform == "linux" ? "sudo " : ""
+      } docker stop ${containerID}`,
+      false
+    );
     process.exit(0);
   });
 }
