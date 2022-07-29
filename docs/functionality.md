@@ -9,8 +9,13 @@ A user with a Level0 membership is essentially a spectator on the application, t
 ## Collectibles
 Collectibles are a blanket term, referring to items that can be given to members. These include profile titles and profile stickers. Titles are short texts given to a user usually as a reward. For example, a user who won some competition may receive a "Champion" title. Stickers are similar, but are small icons instead of strings of text.
 
-## Membership Points
-Membership points can be used to represent a user's activity within an organisation. Collectibles have membership points associated to them, for example, any owner of the "Champion" title may receive +20 membership points when they receive it. Likewise, buying memberships can award membership points too.
+## Membership Rating and Points
+Membership rating can be used to represent a user's activity within an organisation. Collectibles have membership rating associated to them, for example, any owner of the "Champion" title may receive +20 membership rating when they receive it. Likewise, buying memberships can award membership rating too. Membership points are fungible tokens that can be awarded to users like collectibles. Users can use this token in any way that the organisation implements it.
+
+There are many things which can award membership rating, but membership points are given directly. Whenever membership *points* are given, the equal amount is also added onto the user's membership *rating* but **not** vice-versa.
+
+### Rating Buffs
+When a user receives membership points, the value is actually buffed by a multiplier before it is added into their wallet. This multiplier is calcualted by the user's membership rating. The higher their rating is, the higher the multiplier will be, the default multiplier is of course 1. After the buff has been applied, the user's membership point balance is added to, alongiside their membership raitng.
 
 ## Expiration
 If your membership expires, you have 7 days to renew it until your total membership is destroyed. During this grace period, you cannot use the membership and total membership length does not increase, it is purely there to give users time to renew their subscriptions so they don't lose everything. After the grace period has elapsed, any membership related data (including collectibles) is destroyed from the account as the account is reset to a fresh level 0.
