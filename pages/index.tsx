@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import { useTheme } from 'next-themes';
+import router from 'next/router';
 import { useEffect, useState } from 'react';
 
 const Home: NextPage = () => {
@@ -149,13 +150,22 @@ const Home: NextPage = () => {
                     className="flex-col text-base items-center bg-neutral-300 rounded shadow-2xl hidden"
                     id="dropdown"
                   >
-                    <a className="hover:bg-neutral-600 hover:text-white rounded p-0.5">
+                    <a
+                      className="hover:bg-neutral-600 hover:text-white rounded p-0.5 cursor-pointer"
+                      onClick={() => router.push('/members')}
+                    >
                       Members
                     </a>
-                    <a className="hover:bg-neutral-600 hover:text-white rounded p-0.5">
+                    <a
+                      className="hover:bg-neutral-600 hover:text-white rounded p-0.5 cursor-pointer"
+                      onClick={() => router.push('/leaderboard')}
+                    >
                       Leaderboard
                     </a>
-                    <a className="hover:bg-neutral-600 hover:text-white rounded p-0.5">
+                    <a
+                      className="hover:bg-neutral-600 hover:text-white rounded p-0.5 cursor-pointer"
+                      onClick={() => router.push('/mymemberships')}
+                    >
                       My Memberships
                     </a>
                   </div>
