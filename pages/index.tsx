@@ -1,11 +1,14 @@
 import type { NextPage } from 'next';
 import { useTheme } from 'next-themes';
+import router from 'next/router';
 import { useEffect, useState } from 'react';
+import Dropdown from '../components/dropdown';
 
 const Home: NextPage = () => {
   //logic for theme changer
   const { systemTheme, theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  //const dropdown = document.querySelector('#dropdown');
 
   useEffect(() => {
     setMounted(true);
@@ -112,21 +115,6 @@ const Home: NextPage = () => {
       );
     }
   }
-  //javascript logic for dropdown
-  window.addEventListener('DOMContentLoaded', () => {
-    const menuBtn = document.querySelector('#menu-btn');
-    const dropdown = document.querySelector('#dropdown');
-
-    menuBtn?.addEventListener('click', () => {
-      if (dropdown?.classList.contains('hidden')) {
-        dropdown.classList.remove('hidden');
-        dropdown.classList.add('flex');
-      } else {
-        dropdown?.classList.remove('flex');
-        dropdown?.classList.add('hidden');
-      }
-    });
-  });
 
   return (
     <div className="flex items-center justify-center h-fit pt-5">
@@ -137,49 +125,24 @@ const Home: NextPage = () => {
         <div>
           <div className="flex text-3xl font-montserrat pt-5">
             <div>
-              <div className="font-bold">KCL Blockchain</div>
+              <div className="flex justify-center font-bold">KCL Blockchain</div>
               <div className="flex justify-center font-normal ">Affiliates</div>
               <div className="flex justify-center font-thin text-lg italic">
                 We are the best society!
               </div>
-              <div className="flex justify-center pt-5">
-                <div>
-                  <button
-                    className="bg-transparent hover:bg-neutral-900 text-bg-neutral-900 text-base font-semibold hover:text-white py-2 px-4 border-2 border-neutral-900 hover:border-transparent rounded"
-                    id="menu-btn"
-                  >
-                    Memberships \/
-                  </button>
-                  <div
-                    className="flex-col text-base items-center bg-neutral-300 rounded shadow-2xl hidden"
-                    id="dropdown"
-                  >
-                    <a
-                      href=""
-                      className="hover:bg-neutral-600 hover:text-white rounded p-0.5"
-                    >
-                      Members
-                    </a>
-                    <a
-                      href=""
-                      className="hover:bg-neutral-600 hover:text-white rounded p-0.5"
-                    >
-                      Leaderboard
-                    </a>
-                    <a
-                      href=""
-                      className="hover:bg-neutral-600 hover:text-white rounded p-0.5"
-                    >
-                      My Memberships
-                    </a>
-                  </div>
-                </div>
+              <div className='flex justify-center pt-3'>
+                <Dropdown/>
+              </div>
+              {/* <div className="grid gap-0 grid-cols-1 grid-rows-3 p-3">
+                <div className='w-96 h-96 bg-neutral-300'></div>
+              </div> */}
+              
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    
   );
 };
 
