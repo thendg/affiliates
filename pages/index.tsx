@@ -6,6 +6,7 @@ const Home: NextPage = () => {
   //logic for theme changer
   const { systemTheme, theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
+  const dropdown = document.querySelector('#dropdown');
 
   useEffect(() => {
     setMounted(true);
@@ -112,21 +113,6 @@ const Home: NextPage = () => {
       );
     }
   }
-  //javascript logic for dropdown
-  window.addEventListener('DOMContentLoaded', () => {
-    const menuBtn = document.querySelector('#menu-btn');
-    const dropdown = document.querySelector('#dropdown');
-
-    menuBtn?.addEventListener('click', () => {
-      if (dropdown?.classList.contains('hidden')) {
-        dropdown.classList.remove('hidden');
-        dropdown.classList.add('flex');
-      } else {
-        dropdown?.classList.remove('flex');
-        dropdown?.classList.add('hidden');
-      }
-    });
-  });
 
   return (
     <div className="flex items-center justify-center h-fit pt-5">
@@ -147,6 +133,15 @@ const Home: NextPage = () => {
                   <button
                     className="bg-transparent hover:bg-neutral-900 text-bg-neutral-900 text-base font-semibold hover:text-white py-2 px-4 border-2 border-neutral-900 hover:border-transparent rounded"
                     id="menu-btn"
+                    onClick={() => {
+                      if (dropdown?.classList.contains('hidden')) {
+                        dropdown?.classList.remove('hidden');
+                        dropdown?.classList.add('flex');
+                      } else {
+                        dropdown?.classList.remove('flex');
+                        dropdown?.classList.add('hidden');
+                      }
+                    }}
                   >
                     Memberships \/
                   </button>
@@ -154,22 +149,13 @@ const Home: NextPage = () => {
                     className="flex-col text-base items-center bg-neutral-300 rounded shadow-2xl hidden"
                     id="dropdown"
                   >
-                    <a
-                      href=""
-                      className="hover:bg-neutral-600 hover:text-white rounded p-0.5"
-                    >
+                    <a className="hover:bg-neutral-600 hover:text-white rounded p-0.5">
                       Members
                     </a>
-                    <a
-                      href=""
-                      className="hover:bg-neutral-600 hover:text-white rounded p-0.5"
-                    >
+                    <a className="hover:bg-neutral-600 hover:text-white rounded p-0.5">
                       Leaderboard
                     </a>
-                    <a
-                      href=""
-                      className="hover:bg-neutral-600 hover:text-white rounded p-0.5"
-                    >
+                    <a className="hover:bg-neutral-600 hover:text-white rounded p-0.5">
                       My Memberships
                     </a>
                   </div>
