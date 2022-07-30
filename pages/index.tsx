@@ -3,12 +3,29 @@ import { useTheme } from 'next-themes';
 import router from 'next/router';
 import { useEffect, useState } from 'react';
 import Dropdown from '../components/dropdown';
+import Memberships from '../components/memberships';
+import Leaderboard from '../components/leadership_board';
+import Members from '../components/members';
+import MyMemberships from '../components/MyMemberships';
+import Mymemberships from './mymemberships';
+
+const sections: { name: string, component: JSX.Element }[] = [
+  {
+    name: 'Membership',
+    component: <Memberships />,
+  },
+  { name: 'Members', component: <Members /> },
+  { name: 'Leaderboard', component: <Leaderboard /> },
+  { name: 'My Memberships', component: <Mymemberships /> },
+];
 
 const Home: NextPage = () => {
   //logic for theme changer
   const { systemTheme, theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  //const dropdown = document.querySelector('#dropdown');
+  const [content, setContent] = useState(sections[0].component);
+  const setContentByIndex = (index: number) =>
+    setContent(sections[index].component);
 
   useEffect(() => {
     setMounted(true);
@@ -117,32 +134,34 @@ const Home: NextPage = () => {
   }
 
   return (
-    <div className="flex items-center justify-center h-fit pt-5">
-      <div>
-        <div className="flex items-center justify-center">
-          {renderThemeChanger()}
-        </div>
+    <div>
+      <div className="flex items-center justify-center h-fit pt-5">
         <div>
-          <div className="flex text-3xl font-montserrat pt-5">
-            <div>
-              <div className="flex justify-center font-bold">KCL Blockchain</div>
-              <div className="flex justify-center font-normal ">Affiliates</div>
-              <div className="flex justify-center font-thin text-lg italic">
-                We are the best society!
-              </div>
-              <div className='flex justify-center pt-3'>
-                <Dropdown/>
-              </div>
-              {/* <div className="grid gap-0 grid-cols-1 grid-rows-3 p-3">
-                <div className='w-96 h-96 bg-neutral-300'></div>
-              </div> */}
-              
+          <div className="flex items-center justify-center">
+            {renderThemeChanger()}
+          </div>
+          <div>
+            <div className="flex text-3xl font-montserrat pt-5">
+              <div>
+                <div className="flex justify-center font-bold">
+                  KCL Blockchain
+                </div>
+                <div className="flex justify-center font-normal ">
+                  Affiliates
+                </div>
+                <div className="flex justify-center font-thin text-lg italic">
+                  We are the best society!
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    
+      <div className="flex justify-center pt-3">
+        <Dropdown sections={sections} onChange={setContentByIndex} />
+      </div>
+      <div className="pt-5">{content}</div>
+    </div>
   );
 };
 
