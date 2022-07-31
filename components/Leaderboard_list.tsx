@@ -31,9 +31,15 @@ const Leaderboard_list = () => {
   return (
     <>
       {leaderboard_list.map(user => (
-        <h3 key={user.id}>
-          {count++} {user.username} {user.points}
-        </h3>
+        <div className="w-full items-center flex flex-grow-1 place-content-start border-solid border-2 rounded  border-white hover:ring-4 hover:ring-white">
+          <div className="text-3xl w-full">{count++}</div>
+          <div className="text-xl w-full" key={user.id}>
+            {user.username}
+          </div>
+          <div className="text-xl text-right w-full" key={user.id}>
+            {user.points}
+          </div>
+        </div>
       ))}
     </>
   );
