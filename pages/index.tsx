@@ -4,7 +4,7 @@ import router from 'next/router';
 import { useEffect, useState } from 'react';
 import Dropdown from '../components/dropdown';
 import Memberships from '../components/memberships';
-import Leaderboard from '../components/leadership_board';
+import Leaderboard from '../components/leaderboard';
 import Members from '../components/members';
 import MyMemberships from '../components/MyMemberships';
 import Mymemberships from './mymemberships';
