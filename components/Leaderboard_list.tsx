@@ -31,12 +31,12 @@ const Leaderboard_list = () => {
   return (
     <>
       {leaderboard_list.map(user => (
-        <div className="w-full items-center flex flex-grow-1 place-content-start border-solid border-2 rounded  border-white hover:ring-4 hover:ring-white">
-          <div className="text-3xl w-full">{count++}</div>
-          <div className="text-xl w-full" key={user.id}>
+        <div className="w-full pl-5 items-center flex flex-grow-1 place-content-start rounded border-white hover:ring-4 hover:ring-white font-montserrat text-white p-2">
+          <div className="text-lg w-full text-black text-xs">{count++}</div>
+          <div className="p-2 text-xl w-full" key={user.id}>
             {user.username}
           </div>
-          <div className="text-xl text-right w-full" key={user.id}>
+          <div className="p-2 text-xl text-right w-full" key={user.id}>
             {user.points}
           </div>
         </div>
