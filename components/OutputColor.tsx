@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import Background from './Background';
 
 export default function OutputColour({
