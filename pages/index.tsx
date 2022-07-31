@@ -5,13 +5,14 @@ import { useEffect, useState } from 'react';
 import Dropdown from '../components/dropdown';
 import Memberships from '../components/memberships';
 import Leaderboard from '../components/leaderboard';
+import Members from '../components/members';
 
 const sections: { name: string, component: JSX.Element }[] = [
   {
     name: 'Membership',
     component: <Memberships />,
   },
-  // { name: 'Members', component: <Members /> },
+  { name: 'Members', component: <Members /> },
   { name: 'Leaderboard', component: <Leaderboard /> },
 ];
 
